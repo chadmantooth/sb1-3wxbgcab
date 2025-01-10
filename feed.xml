@@ -1,0 +1,311 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+  <channel>
+    <title>EndlessFractal's Threat Intel Feed</title>
+    <link>https://raw.githubusercontent.com/EndlessFractal/hosts/main/feed.xml</link>
+    <description>A combined RSS feed of the 60 most recent articles from various sources</description>
+    <docs>http://www.rssboard.org/rss-specification</docs>
+    <generator>python-feedgen</generator>
+    <lastBuildDate>Fri, 10 Jan 2025 04:23:16 +0000</lastBuildDate>
+    <item>
+      <title>Infocon: green</title>
+      <link>https://isc.sans.edu/diary.html?rss</link>
+      <pubDate>Fri, 10 Jan 2025 02:20:03 +0000</pubDate>
+    </item>
+    <item>
+      <title>ISC Stormcast For Friday, January 10th, 2025 https://isc.sans.edu/podcastdetail/9274, (Fri, Jan 10th)</title>
+      <link>https://isc.sans.edu/diary/rss/31576</link>
+      <pubDate>Fri, 10 Jan 2025 01:26:17 +0000</pubDate>
+    </item>
+    <item>
+      <title>Windows Defender Chrome Extension Detection, (Fri, Jan 10th)</title>
+      <link>https://isc.sans.edu/diary/rss/31574</link>
+      <pubDate>Fri, 10 Jan 2025 00:37:58 +0000</pubDate>
+    </item>
+    <item>
+      <title>U.S. Medical billing provider Medusind suffered a sata breach</title>
+      <link>https://securityaffairs.com/172870/data-breach/medusind-data-breach.html</link>
+      <pubDate>Thu, 09 Jan 2025 22:36:54 +0000</pubDate>
+    </item>
+    <item>
+      <title>Chinese spies targeting new Ivanti vulnerability, Mandiant says</title>
+      <link>https://therecord.media/china-espionage-ivanti-vulnerabilities-mandiant</link>
+      <pubDate>Thu, 09 Jan 2025 20:34:07 +0000</pubDate>
+    </item>
+    <item>
+      <title>Smashing Security podcast #399: Honey in hot water, and reset your devices</title>
+      <link>https://grahamcluley.com/smashing-security-podcast-399/</link>
+      <pubDate>Thu, 09 Jan 2025 20:03:09 +0000</pubDate>
+    </item>
+    <item>
+      <title>What’s Next for Open Source Software Security in 2025?</title>
+      <link>https://www.techrepublic.com/article/open-source-software-security-trends-2025/</link>
+      <pubDate>Thu, 09 Jan 2025 19:53:09 +0000</pubDate>
+    </item>
+    <item>
+      <title>Do we still have to keep doing it like this?</title>
+      <link>https://blog.talosintelligence.com/do-we-still-have-to-keep-doing-it-like-this/</link>
+      <pubDate>Thu, 09 Jan 2025 19:15:53 +0000</pubDate>
+    </item>
+    <item>
+      <title>Space Bears ransomware: what you need to know</title>
+      <link>https://www.tripwire.com/state-of-security/space-bears-ransomware-what-you-need-know</link>
+      <pubDate>Thu, 09 Jan 2025 18:17:32 +0000</pubDate>
+    </item>
+    <item>
+      <title>Major Vulnerabilities Patched in SonicWall, Palo Alto Expedition, and Aviatrix Controllers</title>
+      <link>https://thehackernews.com/2025/01/major-vulnerabilities-patched-in.html</link>
+      <pubDate>Thu, 09 Jan 2025 17:29:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Zero-Day Vulnerability in Ivanti VPN</title>
+      <link>https://www.schneier.com/blog/archives/2025/01/zero-day-vulnerability-in-ivanti-vpn.html</link>
+      <pubDate>Thu, 09 Jan 2025 17:16:38 +0000</pubDate>
+    </item>
+    <item>
+      <title>Fancy Product Designer Plugin Flaws Expose WordPress Sites</title>
+      <link>https://www.infosecurity-magazine.com/news/fancy-product-designer-plugin-flaws/</link>
+      <pubDate>Thu, 09 Jan 2025 17:15:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Google Chrome AI extensions deliver info-stealing malware in broad attack</title>
+      <link>https://www.malwarebytes.com/blog/news/2025/01/google-chrome-ai-extensions-deliver-info-stealing-malware-in-broad-attack</link>
+      <pubDate>Thu, 09 Jan 2025 16:35:07 +0000</pubDate>
+    </item>
+    <item>
+      <title>Japan Faces Prolonged Cyber-Attacks Linked to China’s MirrorFace</title>
+      <link>https://www.infosecurity-magazine.com/news/japan-faces-cyberattacks-china/</link>
+      <pubDate>Thu, 09 Jan 2025 16:30:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Hackers claim to breach Russian state agency managing property, land records</title>
+      <link>https://therecord.media/hackers-claim-to-breach-russian-state-agency-land-records</link>
+      <pubDate>Thu, 09 Jan 2025 16:05:23 +0000</pubDate>
+    </item>
+    <item>
+      <title>PowerSchool Reportedly Pays Ransom to Prevent Student Data Leak</title>
+      <link>https://www.infosecurity-magazine.com/news/powerschool-pays-ransom-data-leak/</link>
+      <pubDate>Thu, 09 Jan 2025 16:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Apple says it does not use Siri audio for advertising</title>
+      <link>https://therecord.media/apple-says-siri-audio-not-used-advertising</link>
+      <pubDate>Thu, 09 Jan 2025 15:45:09 +0000</pubDate>
+    </item>
+    <item>
+      <title>Massive breach at location data seller: “Millions” of users affected</title>
+      <link>https://www.malwarebytes.com/blog/news/2025/01/massive-breach-at-location-data-seller-millions-of-users-affected</link>
+      <pubDate>Thu, 09 Jan 2025 15:21:57 +0000</pubDate>
+    </item>
+    <item>
+      <title>Ukrainian Cyber Alliance destroyed the connectivity of Russian ISP Nodex</title>
+      <link>https://securityaffairs.com/172864/hacktivism/ukrainian-cyber-alliance-destroyed-russian-isp-nodex.html</link>
+      <pubDate>Thu, 09 Jan 2025 15:07:44 +0000</pubDate>
+    </item>
+    <item>
+      <title>Android Malware &amp; Security Issue 2st Week of January, 2025</title>
+      <link>https://asec.ahnlab.com/en/85668/</link>
+      <pubDate>Thu, 09 Jan 2025 15:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>The 3-Step Configuration Review</title>
+      <link>https://symantec-enterprise-blogs.security.com/product-insights/maximize-security</link>
+      <pubDate>Thu, 09 Jan 2025 14:48:31 +0000</pubDate>
+    </item>
+    <item>
+      <title>Cybersecurity trends: IBM’s predictions for 2025</title>
+      <link>https://securityintelligence.com/articles/cybersecurity-trends-ibm-predictions-2025/</link>
+      <pubDate>Thu, 09 Jan 2025 14:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>GroupGreeting e-card site attacked in “zqxq” campaign</title>
+      <link>https://www.malwarebytes.com/blog/news/2025/01/groupgreeting-e-card-site-attacked-inzqxq-campaign</link>
+      <pubDate>Thu, 09 Jan 2025 14:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>New Banshee Stealer Variant Bypasses Antivirus with Apple’s XProtect-Inspired Encryption</title>
+      <link>https://thehackernews.com/2025/01/new-banshee-stealer-variant-bypasses.html</link>
+      <pubDate>Thu, 09 Jan 2025 13:40:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Some Winston-Salem city services knocked offline by cyberattack</title>
+      <link>https://therecord.media/winston-salem-north-carolina-services-offline-cyberattack</link>
+      <pubDate>Thu, 09 Jan 2025 13:32:33 +0000</pubDate>
+    </item>
+    <item>
+      <title>IPVanish VPN Review: Is It Really as Secure as Claimed?</title>
+      <link>https://www.techrepublic.com/article/ipvanish-vpn-review/</link>
+      <pubDate>Thu, 09 Jan 2025 13:00:30 +0000</pubDate>
+    </item>
+    <item>
+      <title>Product Walkthrough: How Reco Discovers Shadow AI in SaaS</title>
+      <link>https://thehackernews.com/2025/01/product-review-how-reco-discovers.html</link>
+      <pubDate>Thu, 09 Jan 2025 11:55:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>U.S. CISA adds Ivanti Connect Secure, Policy Secure, and ZTA Gateways flaw to its Known Exploited Vulnerabilities catalog</title>
+      <link>https://securityaffairs.com/172857/hacking/u-s-cisa-adds-ivanti-connect-secure-policy-secure-and-zta-gateways-flaw-to-its-known-exploited-vulnerabilities-catalog.html</link>
+      <pubDate>Thu, 09 Jan 2025 11:53:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>EU Commission Liable for Breaching EU’s Own Data Protection Rules</title>
+      <link>https://www.infosecurity-magazine.com/news/eu-commission-liable-data/</link>
+      <pubDate>Thu, 09 Jan 2025 11:30:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>United Nations aviation agency hacked, recruitment database plundered</title>
+      <link>https://www.bitdefender.com/en-us/blog/hotforsecurity/united-nations-aviation-agency-hacked-recruitment-database-plundered</link>
+      <pubDate>Thu, 09 Jan 2025 11:07:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>Webinar: Learn How to Stop Encrypted Attacks Before They Cost You Millions</title>
+      <link>https://thehackernews.com/2025/01/webinar-learn-how-to-stop-encrypted.html</link>
+      <pubDate>Thu, 09 Jan 2025 10:44:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>MirrorFace Leverages ANEL and NOOPDOOR in Multi-Year Cyberattacks on Japan</title>
+      <link>https://thehackernews.com/2025/01/mirrorface-leverages-anel-and-noopdoor.html</link>
+      <pubDate>Thu, 09 Jan 2025 10:44:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Government Launches £1.9m Initiative to Boost UK’s Cyber Resilience</title>
+      <link>https://www.infosecurity-magazine.com/news/government-19m-boost-uks-cyber/</link>
+      <pubDate>Thu, 09 Jan 2025 10:30:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>SOC Scalability: How AI Supports Growth Without Overloading Analysts</title>
+      <link>https://securityaffairs.com/172831/security/scaling-up-a-security-operations-center-soc.html</link>
+      <pubDate>Thu, 09 Jan 2025 10:11:41 +0000</pubDate>
+    </item>
+    <item>
+      <title>Critical Ivanti Zero-Day Exploited in the Wild</title>
+      <link>https://www.infosecurity-magazine.com/news/critical-ivanti-zeroday-exploited/</link>
+      <pubDate>Thu, 09 Jan 2025 09:45:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Critical RCE Flaw in GFI KerioControl Allows Remote Code Execution via CRLF Injection</title>
+      <link>https://thehackernews.com/2025/01/critical-rce-flaw-in-gfi-keriocontrol.html</link>
+      <pubDate>Thu, 09 Jan 2025 09:35:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Ivanti Flaw CVE-2025-0282 Actively Exploited, Impacts Connect Secure and Policy Secure</title>
+      <link>https://thehackernews.com/2025/01/ivanti-flaw-cve-2025-0282-actively.html</link>
+      <pubDate>Thu, 09 Jan 2025 07:13:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>E.U. Commission Fined for Transferring User Data to Meta in Violation of Privacy Laws</title>
+      <link>https://thehackernews.com/2025/01/eu-commission-fined-for-transferring.html</link>
+      <pubDate>Thu, 09 Jan 2025 07:13:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Examining Redtail Analyzing a Sophisticated Cryptomining Malware and its Advanced Tactics [Guest Diary], (Thu, Jan 9th)</title>
+      <link>https://isc.sans.edu/diary/rss/31568</link>
+      <pubDate>Thu, 09 Jan 2025 01:45:26 +0000</pubDate>
+    </item>
+    <item>
+      <title>ISC Stormcast For Thursday, January 9th, 2025 https://isc.sans.edu/podcastdetail/9272, (Thu, Jan 9th)</title>
+      <link>https://isc.sans.edu/diary/rss/31572</link>
+      <pubDate>Thu, 09 Jan 2025 01:32:18 +0000</pubDate>
+    </item>
+    <item>
+      <title>Chinese State-Sponsored RedDelta Targeted Taiwan, Mongolia, and Southeast Asia with Adapted PlugX Infection Chain</title>
+      <link>https://www.recordedfuture.com/research/reddelta-chinese-state-sponsored-group-targets-mongolia-taiwan-southeast-asia</link>
+      <pubDate>Thu, 09 Jan 2025 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>SonicWall warns of an exploitable SonicOS vulnerability</title>
+      <link>https://securityaffairs.com/172823/security/sonicwall-sonicos-authentication-bypass-flaw.html</link>
+      <pubDate>Wed, 08 Jan 2025 23:09:12 +0000</pubDate>
+    </item>
+    <item>
+      <title>Casio warns employees, customers about data leak from October ransomware attack</title>
+      <link>https://therecord.media/casio-warns-employees-customers-ransomware-attack-october</link>
+      <pubDate>Wed, 08 Jan 2025 22:22:42 +0000</pubDate>
+    </item>
+    <item>
+      <title>US to Launch Cyber Trust Mark to Label Secure Smart Devices</title>
+      <link>https://www.techrepublic.com/article/us-cyber-trust-mark-iot-security/</link>
+      <pubDate>Wed, 08 Jan 2025 20:09:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>Gayfemboy Botnet targets Four-Faith router vulnerability</title>
+      <link>https://securityaffairs.com/172805/malware/gayfemboy-mirai-botnet-four-faith-flaw.html</link>
+      <pubDate>Wed, 08 Jan 2025 19:09:11 +0000</pubDate>
+    </item>
+    <item>
+      <title>Neglected Domains Used in Malspam to Evade SPF and DMARC Security Protections</title>
+      <link>https://thehackernews.com/2025/01/neglected-domains-used-in-malspam-to.html</link>
+      <pubDate>Wed, 08 Jan 2025 18:09:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>US Cyber Trust Mark logo for smart devices is coming</title>
+      <link>https://www.malwarebytes.com/blog/news/2025/01/us-cyber-trust-mark-logo-for-smart-devices-is-coming</link>
+      <pubDate>Wed, 08 Jan 2025 17:35:39 +0000</pubDate>
+    </item>
+    <item>
+      <title>Green Bay Packers Pro Shop Data Breach Compromises Customers</title>
+      <link>https://www.infosecurity-magazine.com/news/green-bay-packers-shop-data-breach/</link>
+      <pubDate>Wed, 08 Jan 2025 16:30:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>EAGERBEE Malware Detection: New Backdoor Variant Targets Internet Service Providers and State Bodies in the Middle East</title>
+      <link>https://socprime.com/blog/eagerbee-malware-detection/</link>
+      <pubDate>Wed, 08 Jan 2025 15:29:02 +0000</pubDate>
+    </item>
+    <item>
+      <title>US Launches Cyber Trust Mark for IoT Devices</title>
+      <link>https://www.infosecurity-magazine.com/news/us-cyber-trust-mark-iot/</link>
+      <pubDate>Wed, 08 Jan 2025 15:20:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Ransom &amp; Dark Web Issues Week 2, January 2025</title>
+      <link>https://asec.ahnlab.com/en/85635/</link>
+      <pubDate>Wed, 08 Jan 2025 15:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Scammers Exploit Microsoft 365 to Target PayPal Users</title>
+      <link>https://www.infosecurity-magazine.com/news/scammers-exploit-microsoft365/</link>
+      <pubDate>Wed, 08 Jan 2025 14:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Cloud threat report: Why have SaaS platforms on dark web marketplaces decreased?</title>
+      <link>https://securityintelligence.com/articles/cloud-threat-report-why-have-saas-platforms-on-dark-web-marketplaces-decreased/</link>
+      <pubDate>Wed, 08 Jan 2025 14:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Phish-free PayPal Phishing</title>
+      <link>https://feeds.fortinet.com/~/910638929/0/fortinet/blog/threat-research~Phishfree-PayPal-Phishing</link>
+      <pubDate>Wed, 08 Jan 2025 14:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Researchers Expose NonEuclid RAT Using UAC Bypass and AMSI Evasion Techniques</title>
+      <link>https://thehackernews.com/2025/01/researchers-expose-noneuclid-rat-using.html</link>
+      <pubDate>Wed, 08 Jan 2025 13:37:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Trader Arrested For Stealing Trade Secrets From Global Quantitative Trading Firm</title>
+      <link>https://www.justice.gov/usao-sdny/pr/trader-arrested-stealing-trade-secrets-global-quantitative-trading-firm</link>
+      <pubDate>Wed, 08 Jan 2025 12:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>CISA Adds One Vulnerability to the KEV Catalog</title>
+      <link>https://www.cisa.gov/news-events/alerts/2025/01/08/cisa-adds-one-vulnerability-kev-catalog</link>
+      <pubDate>Wed, 08 Jan 2025 12:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Ivanti Releases Security Updates for Connect Secure, Policy Secure, and ZTA Gateways</title>
+      <link>https://www.cisa.gov/news-events/alerts/2025/01/08/ivanti-releases-security-updates-connect-secure-policy-secure-and-zta-gateways</link>
+      <pubDate>Wed, 08 Jan 2025 12:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Casio Admits Security Failings as Attackers Leak Employee and Customer Data</title>
+      <link>https://www.infosecurity-magazine.com/news/casio-failings-attackers-leak-data/</link>
+      <pubDate>Wed, 08 Jan 2025 11:30:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Top 5 Malware Threats to Prepare Against in 2025</title>
+      <link>https://thehackernews.com/2025/01/top-5-malware-threats-to-prepare.html</link>
+      <pubDate>Wed, 08 Jan 2025 11:02:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>

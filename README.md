@@ -1,54 +1,69 @@
-# Astro Starter Kit: Basics
+# EndlessFractal's Threat Intel Feed
 
-```sh
-npm create astro@latest -- --template basics
-```
+This automated feed retrieves a list of feeds from various sources, consolidates them and saves to a file called `feed.xml`.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## Files
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- `FeedMerger.py` - Combines multiple RSS feeds into a single feed and saves it as an XML file.
+- `RSSparser.py` - Parses an RSS feed, formats new entries as payloads, and sends them to specified webhook URLs with a delay between each post.
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## Usage
 
-## 🚀 Project Structure
+Just import the following link into your favorite RSS reader!
 
-Inside of your Astro project, you'll see the following folders and files:
+> https://raw.githubusercontent.com/EndlessFractal/Threat-Intel-Feed/main/feed.xml
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Sources
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+The script retrieves feeds from the following sources:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- [AhnLab ASEC Feed](https://asec.ahnlab.com/en/feed/)
+- [AT&T Cybersecurity Blog](https://cybersecurity.att.com/site/blog-all-rss)
+- [Bitdefender Labs Blog](https://www.bitdefender.com/blog/api/rss/labs/)
+- [Broadcom SED Blog](https://sed-cms.broadcom.com/rss/v1/blogs/rss.xml)
+- [CISA ICS Advisories](https://www.cisa.gov/cybersecurity-advisories/ics-advisories.xml)
+- [CISA ICS Medical Advisories](https://www.cisa.gov/cybersecurity-advisories/ics-medical-advisories.xml)
+- [Cloudflare Security Blog](https://blog.cloudflare.com/tag/security/rss)
+- [CrowdStrike Blog](https://www.crowdstrike.com/blog/feed)
+- [Darknet Blog](https://www.darknet.org.uk/feed/)
+- [DataBreachToday](https://www.databreachtoday.com/rss-feeds)
+- [EclecticIQ Blog](https://blog.eclecticiq.com/rss.xml)
+- [ESET Blog](https://blog.eset.com/feed)
+- [Fortinet Threat Research Blog](https://feeds.fortinet.com/fortinet/blog/threat-research)
+- [Google Project Zero Blog](https://googleprojectzero.blogspot.com/feeds/posts/default)
+- [GovTech Cybersecurity Blog](https://www.govtech.com/blogs/lohrmann-on-cybersecurity.rss)
+- [Graham Cluley's Blog](https://www.grahamcluley.com/feed/)
+- [HackerOne Blog](https://www.hackerone.com/blog.rss)
+- [Hackmageddon Blog](https://www.hackmageddon.com/feed/)
+- [IBM Security Intelligence Blog](https://securityintelligence.com/feed/)
+- [Infosecurity Magazine News](https://www.infosecurity-magazine.com/rss/news/)
+- [Intezer Research Blog](https://intezer.com/blog/research/feed/)
+- [Kaspersky Securelist Blog](https://securelist.com/feed/)
+- [KrebsOnSecurity Blog](https://krebsonsecurity.com/feed/)
+- [Malwarebytes Blog](https://blog.malwarebytes.com/feed/)
+- [Microsoft Security Blog](https://www.microsoft.com/en-us/security/blog/feed/)
+- [Nao-Sec Blog](https://nao-sec.org/feed.xml)
+- [NIST Cybersecurity Insights](https://www.nist.gov/blogs/cybersecurity-insights/rss.xml)
+- [Palo Alto Networks Unit 42 Blog](https://unit42.paloaltonetworks.com//feed)
+- [Proofpoint Blog](https://www.proofpoint.com/us/blog)
+- [Recorded Future Blog](https://www.recordedfuture.com/feed)
+- [SANS Internet Storm Center Blog](https://isc.sans.edu/rssfeed_full.xml)
+- [Schneier on Security Blog](https://www.schneier.com/blog/atom.xml)
+- [Sebdraven's Medium Blog](https://sebdraven.medium.com/feed)
+- [Security Affairs Blog](https://securityaffairs.co//feed)
+- [SensePost Blog](https://sensepost.com/rss.xml)
+- [SentinelOne Blog](https://www.sentinelone.com/feed/)
+- [SOC Prime Blog](https://socprime.com/feed/)
+- [Sophos News Blog](https://news.sophos.com/feed/)
+- [Talos Intelligence Blog](https://blog.talosintelligence.com/rss/)
+- [TechRepublic Security News](https://www.techrepublic.com/rssfeeds/topic/security/)
+- [The CyberWire Blog](https://thecyberwire.com/feeds/rss.xml)
+- [The Guardian Technology Security](https://www.theguardian.com/technology/data-computer-security/rss)
+- [The Hacker News Blog](https://thehackernews.com/feeds/posts/default)
+- [The Record Media Blog](https://therecord.media//feed)
+- [Threatpost Blog](https://threatpost.com/feed/)
+- [Troy Hunt's Blog](https://www.troyhunt.com/rss/)
+- [US-CERT Alerts](https://us-cert.cisa.gov/ncas/alerts.xml)
+- [US-CERT Analysis Reports](https://us-cert.cisa.gov/ncas/analysis-reports.xml)
+- [US-CERT Current Activity](https://us-cert.cisa.gov/ncas/current-activity.xml)
+- [US-DOJ Cybercrime News](https://www.justice.gov/news/rss?f[0]=facet_topics:3911)
