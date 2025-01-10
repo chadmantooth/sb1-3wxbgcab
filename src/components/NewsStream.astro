@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+
+// Get news and sort by date
+const news = await getCollection('news');
+const sortedNews = news.sort((a, b) => 
+  b.data.publishDate.getTime() - a.data.publishDate.getTime()
+);
+---
+
+<div class="space-y-6">
+  {sortedNews.map((item) => (
+    <article class="bg-white rounded-lg shadow-sm overflow-hidden transition-shadow hover:shadow-md">
+      <a href={item.data.url} class="block" target="_blank" rel="noopener noreferrer">
+        <div class="p-6">
+          <time datetime={item.data.publishDate.toISOString()} class="text-sm text-gray-500">
+            {new Intl.DateTimeFormat('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            }).format(item.data.publishDate)}
+          </time>
+          <h2 class="mt-2 text-xl font-semibold text-gray-900 line-clamp-2">
+            {item.data.title}
+          </h2>
+          <p class="mt-3 text-gray-600 line-clamp-3">
+            {item.data.summary}
+          </p>
+        </div>
+      </a>
+    </article>
+  ))}
+</div>
+
+<script>
+// Infinite scroll implementation
+let page = 1;
+const loadMoreNews = () => {
+  const scrollPosition = window.innerHeight + window.scrollY;
+  const pageBottom = document.documentElement.offsetHeight - 1000;
+  
+  if (scrollPosition >= pageBottom) {
+    // Load more content logic here
+    page++;
+  }
+};
+
+window.addEventListener('scroll', loadMoreNews);
+</script>

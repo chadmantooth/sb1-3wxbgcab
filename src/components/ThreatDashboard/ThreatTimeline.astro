@@ -1,0 +1,67 @@
+---
+---
+<div class="space-y-4">
+  <div class="relative">
+    <div class="absolute left-3 top-0 bottom-0 w-0.5 bg-gray-200"></div>
+    <div id="timelineItems" class="space-y-6 pl-8">
+      <!-- Timeline items will be populated by JavaScript -->
+      <div class="animate-pulse space-y-4">
+        <div class="h-20 bg-gray-100 rounded"></div>
+        <div class="h-20 bg-gray-100 rounded"></div>
+        <div class="h-20 bg-gray-100 rounded"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+async function updateTimeline() {
+  try {
+    const response = await fetch('/api/threats');
+    const threats = await response.json();
+    
+    const timelineEl = document.getElementById('timelineItems');
+    if (!timelineEl) return;
+
+    const timelineItems = threats
+      .sort((a: any, b: any) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+      .slice(0, 5)
+      .map((threat: any) => `
+        <div class="relative">
+          <div class="absolute -left-8 mt-1.5 w-3 h-3 rounded-full ${getSeverityColor(threat.severity)}"></div>
+          <div class="bg-white p-4 rounded-lg border border-gray-200">
+            <time class="text-sm text-gray-500">${formatDate(threat.timestamp)}</time>
+            <h3 class="mt-1 font-medium text-gray-900">${threat.title}</h3>
+            <p class="mt-1 text-sm text-gray-600">${threat.description}</p>
+          </div>
+        </div>
+      `);
+
+    timelineEl.innerHTML = timelineItems.join('');
+  } catch (error) {
+    console.error('Failed to update timeline:', error);
+  }
+}
+
+function getSeverityColor(severity: string): string {
+  const colors = {
+    critical: 'bg-red-500',
+    high: 'bg-orange-500',
+    medium: 'bg-yellow-500',
+    low: 'bg-green-500'
+  };
+  return colors[severity as keyof typeof colors] || 'bg-gray-500';
+}
+
+function formatDate(timestamp: string): string {
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit'
+  }).format(new Date(timestamp));
+}
+
+updateTimeline();
+setInterval(updateTimeline, 300000); // Update every 5 minutes
+</script>

@@ -1,0 +1,95 @@
+---
+---
+<div class="space-y-6">
+  <div class="grid grid-cols-2 gap-4">
+    <div class="bg-gray-50 rounded-lg p-4">
+      <h3 class="text-sm font-medium text-gray-500">Average CVSS Score</h3>
+      <p class="mt-2 text-2xl font-semibold text-gray-900" data-stats="avgCVSS">-</p>
+    </div>
+    <div class="bg-gray-50 rounded-lg p-4">
+      <h3 class="text-sm font-medium text-gray-500">Total Active Threats</h3>
+      <p class="mt-2 text-2xl font-semibold text-gray-900" data-stats="totalThreats">-</p>
+    </div>
+  </div>
+  
+  <div class="h-[200px] relative">
+    <div data-chart="trends"></div>
+    <div data-loading="trends" class="absolute inset-0 flex items-center justify-center bg-gray-50">
+      <p class="text-gray-500">Loading trends data...</p>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+// Client-side only code
+document.addEventListener('DOMContentLoaded', async function() {
+  let trendsChart;
+
+  async function initChart() {
+    try {
+      const ApexCharts = (await import('apexcharts')).default;
+      const options = {
+        chart: {
+          type: 'line',
+          height: 200,
+          toolbar: { show: false },
+          animations: { enabled: true }
+        },
+        series: [{
+          name: 'Active Threats',
+          data: [0, 0, 0, 0, 0]
+        }],
+        xaxis: {
+          categories: ['24h ago', '18h ago', '12h ago', '6h ago', 'Now']
+        },
+        stroke: {
+          curve: 'smooth',
+          width: 3
+        },
+        colors: ['#3B82F6'],
+        grid: {
+          borderColor: '#f1f1f1'
+        }
+      };
+
+      trendsChart = new ApexCharts(document.querySelector("[data-chart='trends']"), options);
+      await trendsChart.render();
+      document.querySelector("[data-loading='trends']")?.remove();
+    } catch (error) {
+      console.error('Failed to initialize trends chart:', error);
+    }
+  }
+
+  async function updateStats() {
+    try {
+      const response = await fetch('/api/threats');
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to fetch threats');
+      }
+      
+      const threats = await response.json();
+      const totalThreats = threats.length;
+      const avgCVSS = threats.reduce((acc, t) => acc + t.cvss, 0) / totalThreats;
+
+      document.querySelector("[data-stats='avgCVSS']").textContent = avgCVSS.toFixed(1);
+      document.querySelector("[data-stats='totalThreats']").textContent = totalThreats.toString();
+
+      if (trendsChart) {
+        trendsChart.updateSeries([{
+          data: [0, 0, 0, 0, threats.length]
+        }]);
+      }
+    } catch (error) {
+      console.error('Failed to update stats:', error);
+    }
+  }
+
+  // Initialize charts and data
+  await initChart();
+  await updateStats();
+
+  // Set up auto-refresh
+  setInterval(updateStats, 300000);
+});
+</script>

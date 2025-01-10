@@ -1,0 +1,47 @@
+---
+interface Props {
+  title: string;
+  summary: string;
+  publishDate: Date | string;
+  vendor: string;
+  url: string;
+}
+
+const { title, summary, publishDate, vendor, url } = Astro.props;
+
+// Ensure we have a valid Date object
+const pubDate = publishDate instanceof Date ? publishDate : new Date(publishDate);
+---
+
+<article class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+  <div class="p-6">
+    <div class="flex items-center justify-between mb-4">
+      <time class="text-sm text-gray-500" datetime={pubDate.toISOString()}>
+        {pubDate.toLocaleDateString()}
+      </time>
+    </div>
+    
+    <h2 class="text-xl font-semibold text-gray-900 mb-2 line-clamp-2">
+      <a href={url} target="_blank" rel="noopener noreferrer" 
+         class="hover:text-blue-600 transition-colors duration-200">
+        {title}
+      </a>
+    </h2>
+    
+    <p class="text-gray-600 mb-4 line-clamp-3">
+      {summary}
+    </p>
+    
+    <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+      <span class="text-sm font-medium text-gray-500">
+        {vendor}
+      </span>
+      <a href={url} 
+         target="_blank" 
+         rel="noopener noreferrer"
+         class="text-sm font-medium text-blue-600 hover:text-blue-800">
+        Read more →
+      </a>
+    </div>
+  </div>
+</article>

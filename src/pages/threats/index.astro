@@ -1,0 +1,92 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header/Header.astro';
+import ThreatDashboard from '../../components/ThreatDashboard/ThreatDashboard.astro';
+
+const title = "Threat Intelligence Feed";
+---
+
+<Layout title={title}>
+  <Header />
+  
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Breadcrumb -->
+    <nav class="mb-6">
+      <ol class="flex items-center space-x-2 text-sm text-gray-500">
+        <li>
+          <a href="/" class="hover:text-gray-700">Home</a>
+        </li>
+        <li>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </li>
+        <li class="text-gray-900 font-medium">{title}</li>
+      </ol>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="mb-8">
+      <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-bold text-gray-900 flex items-center gap-3">
+          <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+          {title}
+        </h1>
+        <div class="flex items-center space-x-4">
+          <button
+            type="button"
+            id="exportBtn"
+            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          >
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            Export Data
+          </button>
+        </div>
+      </div>
+      <p class="mt-2 text-gray-600">Monitor and analyze real-time security threats and vulnerabilities</p>
+    </div>
+
+    <!-- Dashboard -->
+    <ThreatDashboard refreshInterval={300000} />
+  </main>
+</Layout>
+
+<script>
+// Handle data export
+document.getElementById('exportBtn')?.addEventListener('click', async () => {
+  try {
+    const response = await fetch('/api/threats');
+    const threats = await response.json();
+    
+    const csv = [
+      ['Severity', 'Title', 'Category', 'CVSS', 'Timestamp', 'Description'].join(','),
+      ...threats.map((t: any) => [
+        t.severity,
+        `"${t.title.replace(/"/g, '""')}"`,
+        t.category,
+        t.cvss,
+        t.timestamp,
+        `"${t.description.replace(/"/g, '""')}"`
+      ].join(','))
+    ].join('\n');
+
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `threat-feed-${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error('Failed to export data:', error);
+    alert('Failed to export data. Please try again.');
+  }
+});
+</script>

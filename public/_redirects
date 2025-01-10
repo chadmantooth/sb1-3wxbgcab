@@ -1,0 +1,8 @@
+# Redirect default Netlify subdomain to primary domain
+https://techanchorman.netlify.app/* https://techanchorman.io/:splat 301!
+
+# Handle www subdomain
+https://www.techanchorman.io/* https://techanchorman.io/:splat 301!
+
+# SPA fallback
+/* /index.html 200

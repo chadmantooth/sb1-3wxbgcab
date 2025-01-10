@@ -1,0 +1,20 @@
+---
+import Navigation from "./Navigation.astro";
+import MobileMenu from "./MobileMenu.astro";
+---
+
+<header class="bg-[#1a1f3d] text-white sticky top-0 z-40 shadow-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20">
+      <div class="flex items-center">
+        <a href="/" class="flex items-center group">
+          <span class="text-3xl font-bold group-hover:text-[#e63946] transition-colors duration-200">
+            TechAnchorman
+          </span>
+        </a>
+      </div>
+      <Navigation />
+      <MobileMenu />
+    </div>
+  </div>
+</header>

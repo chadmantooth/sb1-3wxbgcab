@@ -1,0 +1,158 @@
+---
+import ThreatSummary from './ThreatSummary.astro';
+import ThreatList from './ThreatList.astro';
+import ThreatFilters from './ThreatFilters.astro';
+
+interface Props {
+  refreshInterval?: number;
+}
+
+const { refreshInterval = 300000 } = Astro.props;
+---
+
+<div class="max-w-7xl mx-auto space-y-6">
+  <!-- Critical Alerts Banner -->
+  <div id="criticalAlerts" class="hidden">
+    <div class="bg-red-50 border-l-4 border-red-600 p-4">
+      <div class="flex items-center">
+        <div class="flex-shrink-0">
+          <svg class="h-5 w-5 text-red-600" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"/>
+          </svg>
+        </div>
+        <div class="ml-3">
+          <h3 class="text-sm font-medium text-red-800" id="criticalAlertsCount">Critical Threats Detected</h3>
+          <div class="mt-2 text-sm text-red-700" id="criticalAlertsList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Threat Summary -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div class="bg-white rounded-lg shadow-sm p-4">
+      <h3 class="text-sm font-medium text-gray-500">Critical</h3>
+      <p class="mt-2 text-2xl font-bold text-red-600" id="criticalCount">-</p>
+    </div>
+    <div class="bg-white rounded-lg shadow-sm p-4">
+      <h3 class="text-sm font-medium text-gray-500">High</h3>
+      <p class="mt-2 text-2xl font-bold text-orange-500" id="highCount">-</p>
+    </div>
+    <div class="bg-white rounded-lg shadow-sm p-4">
+      <h3 class="text-sm font-medium text-gray-500">Medium</h3>
+      <p class="mt-2 text-2xl font-bold text-yellow-500" id="mediumCount">-</p>
+    </div>
+    <div class="bg-white rounded-lg shadow-sm p-4">
+      <h3 class="text-sm font-medium text-gray-500">Low</h3>
+      <p class="mt-2 text-2xl font-bold text-green-500" id="lowCount">-</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+    <!-- Filters Sidebar -->
+    <div class="lg:col-span-1">
+      <ThreatFilters />
+    </div>
+
+    <!-- Threat List -->
+    <div class="lg:col-span-3">
+      <div class="bg-white rounded-lg shadow-sm">
+        <div class="p-4 border-b border-gray-200">
+          <div class="flex items-center justify-between">
+            <h2 class="text-lg font-semibold text-gray-900">Active Threats</h2>
+            <span class="text-sm text-gray-500" id="lastUpdated"></span>
+          </div>
+        </div>
+        <ThreatList />
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+import ApexCharts from 'apexcharts';
+
+let updateTimer;
+let trendsChart;
+
+async function updateDashboard() {
+  try {
+    const response = await fetch('/api/threats');
+    if (!response.ok) {
+      const data = await response.json();
+      throw new Error(data.message || data.error || 'Failed to fetch threats');
+    }
+    
+    const threats = await response.json();
+    if (!Array.isArray(threats)) {
+      throw new Error('Invalid response format');
+    }
+
+    const counts = { critical: 0, high: 0, medium: 0, low: 0 };
+    
+    // Update counts
+    threats.forEach(threat => {
+      if (threat.severity in counts) {
+        counts[threat.severity]++;
+      }
+    });
+
+    // Update count displays
+    Object.entries(counts).forEach(([severity, count]) => {
+      const el = document.getElementById(`${severity}Count`);
+      if (el) el.textContent = count.toString();
+    });
+
+    // Handle critical alerts
+    const criticalThreats = threats.filter(t => t.severity === 'critical');
+    const criticalAlertsEl = document.getElementById('criticalAlerts');
+    const criticalAlertsListEl = document.getElementById('criticalAlertsList');
+    
+    if (criticalAlertsEl && criticalAlertsListEl && criticalThreats.length > 0) {
+      criticalAlertsEl?.classList.remove('hidden');
+      criticalAlertsListEl.innerHTML = criticalThreats
+        .map(t => `<p class="mt-1">${t.title}</p>`)
+        .join('');
+    } else if (criticalAlertsEl) {
+      criticalAlertsEl?.classList.add('hidden');
+    }
+
+    // Update last updated timestamp
+    const lastUpdatedEl = document.getElementById('lastUpdated');
+    if (lastUpdatedEl) {
+      lastUpdatedEl.textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
+    }
+
+  } catch (error) {
+    // Show error message in the UI
+    const errorMessage = error.message.includes('API configuration') 
+      ? error.message 
+      : 'Failed to update dashboard. Please try again later.';
+      
+    document.querySelectorAll('[id$="Count"]').forEach(el => {
+      el.textContent = '-';
+    });
+    
+    const lastUpdatedEl = document.getElementById('lastUpdated');
+    if (lastUpdatedEl) {
+      lastUpdatedEl.innerHTML = `
+        <span class="text-red-600">
+          ${errorMessage}
+        </span>
+      `;
+    }
+  }
+}
+
+// Initialize dashboard
+document.addEventListener('DOMContentLoaded', () => {
+  updateDashboard();
+  updateTimer = setInterval(updateDashboard, 300000);
+});
+
+// Cleanup on page unload
+window.addEventListener('unload', () => {
+  if (updateTimer) clearInterval(updateTimer);
+});
+</script>

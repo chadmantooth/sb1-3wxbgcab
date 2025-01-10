@@ -1,0 +1,94 @@
+---
+import { parseFeed } from '../lib/feed/parser';
+import { FEEDSPOT_SOURCE } from '../lib/constants/feedspot';
+import { formatDate } from '../lib/utils/dateUtils';
+
+// Fetch feed data
+const result = await parseFeed(FEEDSPOT_SOURCE);
+const items = result.items || [];
+---
+
+<div class="bg-white rounded-lg shadow-lg overflow-hidden">
+  <div class="p-4 border-b border-gray-200">
+    <h2 class="text-lg font-semibold text-gray-900">Latest Industry News</h2>
+  </div>
+  
+  {items.length > 0 ? (
+    <div class="divide-y divide-gray-200">
+      {items.map(item => (
+        <article class="group p-4 hover:bg-gray-50 transition-all duration-300">
+          <a href={item.url} target="_blank" rel="noopener noreferrer" class="block">
+            <time datetime={item.publishDate.toISOString()} class="text-sm text-gray-500">
+              {formatDate(item.publishDate)}
+            </time>
+            
+            <h3 class="mt-1 text-base font-medium text-gray-900 line-clamp-2 group-hover:text-blue-600">
+              {item.title}
+            </h3>
+            
+            {item.summary && (
+              <p class="mt-2 text-sm text-gray-600 line-clamp-2">
+                {item.summary}
+              </p>
+            )}
+            
+            <div class="mt-2 flex items-center text-sm text-gray-500">
+              <span class="text-sm text-gray-500">{item.vendor || 'News'}</span>
+              <span class="ml-auto font-medium text-blue-600 group-hover:translate-x-1 transition-transform duration-200">
+                Read more →
+              </span>
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  ) : (
+    <div class="p-8 text-center">
+      <div class="animate-pulse space-y-4">
+        <div class="h-4 bg-gray-200 rounded w-3/4 mx-auto"></div>
+        <div class="h-4 bg-gray-200 rounded w-1/2 mx-auto"></div>
+        <div class="h-4 bg-gray-200 rounded w-2/3 mx-auto"></div>
+      </div>
+      <p class="mt-4 text-gray-500">Loading news items...</p>
+    </div>
+  )}
+</div>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .5; }
+  }
+
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+</style>
+
+<script>
+// Auto-refresh feed every 5 minutes
+let refreshInterval: number;
+
+function refreshFeed() {
+  window.location.reload();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  refreshInterval = setInterval(refreshFeed, 5 * 60 * 1000);
+});
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    clearInterval(refreshInterval);
+  } else {
+    refreshInterval = setInterval(refreshFeed, 5 * 60 * 1000);
+  }
+});
+</script>

@@ -1,0 +1,82 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header/Header.astro';
+
+const title = "PBSNOW";
+---
+
+<Layout title={title}>
+  <Header />
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Breadcrumb -->
+    <nav class="mb-6">
+      <ol class="flex items-center space-x-2 text-sm text-gray-500">
+        <li>
+          <a href="/" class="hover:text-gray-700">Home</a>
+        </li>
+        <li>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </li>
+        <li class="text-gray-900 font-medium">{title}</li>
+      </ol>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900">
+        {title}
+      </h1>
+      <p class="mt-2 text-gray-600">Performance Based Service Network Operations Workbench</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="bg-white rounded-lg shadow-sm p-6">
+      <!-- Showcase Container -->
+      <div id="showcase-container" class="min-h-[600px] relative">
+        <div class="loading-indicator text-center py-4">
+          <div class="animate-pulse space-y-4">
+            <div class="h-4 bg-gray-200 rounded w-3/4 mx-auto mb-4" role="presentation"></div>
+            <div class="h-4 bg-gray-200 rounded w-1/2 mx-auto" role="presentation"></div>
+          </div>
+        </div>
+        <div class="showcase"></div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+// Initialize Impartner integration
+window.addEventListener('DOMContentLoaded', () => {
+  const script = document.createElement('script');
+  script.className = 'CspSyndicationScript';
+  script.type = 'text/javascript';
+  script.setAttribute('rel', 'nofollow');
+  script.async = true;
+  script.src = 'https://publisher.impartner.io/Csp/?vendorName=paloaltonextwave-partner-program&partnerId=08dac429-43f7-1033-1be0-e0000702b4a8';
+
+  script.onload = () => {
+    console.log('Impartner script loaded successfully');
+    const loadingEl = document.querySelector('.loading-indicator');
+    if (loadingEl) {
+      loadingEl.remove();
+    }
+  };
+
+  script.onerror = (error) => {
+    console.error('Failed to load Impartner script:', error);
+    const container = document.getElementById('showcase-container');
+    if (container) {
+      container.innerHTML = `
+        <div class="p-8 text-center">
+          <div class="text-red-600">Unable to load showcase. Please refresh the page to try again.</div>
+        </div>
+      `;
+    }
+  };
+
+  document.head.appendChild(script);
+});
+</script>

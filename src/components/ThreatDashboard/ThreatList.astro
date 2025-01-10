@@ -1,0 +1,228 @@
+---
+---
+<div class="overflow-x-auto">
+  <table class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-50">
+      <tr>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Severity</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Threat</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">CVSS</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200" id="threatTableBody">
+      <tr>
+        <td colspan="6" class="px-6 py-4 text-center text-sm text-gray-500">
+          Loading threats...
+          <div class="mt-2 w-full h-1 bg-gray-200 rounded overflow-hidden">
+            <div class="w-1/3 h-full bg-blue-600 animate-pulse"></div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Threat Details Modal -->
+<div id="threatModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+  <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-lg font-semibold text-gray-900" id="modalTitle"></h3>
+      <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <div class="mt-4">
+      <div class="space-y-4">
+        <div>
+          <h4 class="text-sm font-medium text-gray-500">Description</h4>
+          <p id="modalDescription" class="mt-1 text-sm text-gray-900"></p>
+        </div>
+        <div>
+          <h4 class="text-sm font-medium text-gray-500">CVE Number</h4>
+          <div id="modalCVE" class="mt-1 text-sm">
+            <span id="modalCVEText" class="font-mono text-gray-900"></span>
+            <a id="modalSourceLink" href="#" target="_blank" rel="noopener noreferrer" class="hidden ml-2 text-blue-600 hover:text-blue-800">
+              View Source Details →
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-sm font-medium text-gray-500">Mitigation</h4>
+          <p id="modalMitigation" class="mt-1 text-sm text-gray-900"></p>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <h4 class="text-sm font-medium text-gray-500">Severity</h4>
+            <p id="modalSeverity" class="mt-1 text-sm"></p>
+          </div>
+          <div>
+            <h4 class="text-sm font-medium text-gray-500">CVSS Score</h4>
+            <p id="modalCvss" class="mt-1 text-sm text-gray-900"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function getSeverityColor(severity) {
+  return {
+    critical: 'bg-red-100 text-red-800',
+    high: 'bg-orange-100 text-orange-800',
+    medium: 'bg-yellow-100 text-yellow-800',
+    low: 'bg-green-100 text-green-800'
+  }[severity] || 'bg-gray-100 text-gray-800';
+}
+
+function formatTimeAgo(timestamp) {
+  const diff = Date.now() - new Date(timestamp).getTime();
+  const minutes = Math.floor(diff / 60000);
+  
+  if (minutes < 60) return `${minutes}m ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h ago`;
+  return `${Math.floor(hours / 24)}d ago`;
+}
+
+function showThreatDetails(threat) {
+  const modal = document.getElementById('threatModal');
+  const title = document.getElementById('modalTitle');
+  const description = document.getElementById('modalDescription');
+  const mitigation = document.getElementById('modalMitigation');
+  const severity = document.getElementById('modalSeverity');
+  const cveText = document.getElementById('modalCVEText');
+  const sourceLink = document.getElementById('modalSourceLink');
+  const cvss = document.getElementById('modalCvss');
+
+  title.textContent = threat.title;
+  description.textContent = threat.description;
+  mitigation.textContent = threat.mitigation || 'No mitigation steps provided.';
+  severity.textContent = threat.severity;
+  severity.className = `mt-1 text-sm font-medium px-2 py-1 rounded-full inline-block ${getSeverityColor(threat.severity)}`;
+  cvss.textContent = threat.cvss.toFixed(1);
+
+  // Handle CVE and source link
+  if (threat.cve) {
+    cveText.textContent = threat.cve;
+    cveText.parentElement?.classList.remove('hidden');
+  } else {
+    cveText.textContent = 'No CVE assigned';
+    cveText.parentElement?.classList.add('text-gray-500');
+  }
+
+  // Handle source link
+  if (threat.sourceUrl) {
+    sourceLink.href = threat.sourceUrl;
+    sourceLink.classList.remove('hidden');
+  } else {
+    sourceLink.classList.add('hidden');
+  }
+
+  modal.classList.remove('hidden');
+}
+
+let threatData = [];
+
+async function updateThreatList() {
+  try {
+    const response = await fetch('/api/threats');
+    if (!response.ok) {
+      const data = await response.json();
+      throw new Error(data.message || data.error || 'Failed to fetch threats');
+    }
+    
+    const threats = await response.json();    
+    if (!Array.isArray(threats)) {
+      throw new Error('Invalid response format');
+      return;
+    }
+
+    const tbody = document.getElementById('threatTableBody');
+    
+    if (!tbody) return;
+
+    // Store threat data globally
+    threatData = threats;
+
+    tbody.innerHTML = threats.map(threat => `
+      <tr class="hover:bg-gray-50">
+        <td class="px-6 py-4 whitespace-nowrap">
+          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getSeverityColor(threat.severity)}">
+            ${threat.severity}
+          </span>
+        </td>
+        <td class="px-6 py-4">
+          <div class="text-sm text-gray-900">${threat.title}</div>
+          <div class="text-sm text-gray-500 truncate max-w-md">${threat.description}</div>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          ${threat.category}
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          ${threat.cvss.toFixed(1)}
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          ${formatTimeAgo(threat.timestamp)}
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          <button
+            data-threat="${threat.id}"
+            class="text-blue-600 hover:text-blue-800 font-medium"
+          >
+            View Details
+          </button>
+        </td>
+      </tr>
+    `).join('');
+
+  } catch (error) {
+    const tbody = document.getElementById('threatTableBody');
+    if (tbody) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="6" class="px-6 py-4 text-center">
+            <div class="text-sm text-red-600">${error.message}</div>
+          </td>
+        </tr>
+      `;
+    }
+  }
+}
+
+// Event delegation for threat detail buttons
+document.addEventListener('click', (e) => {
+  const button = e.target.closest('button[data-threat]');
+  if (button) {
+    const threatId = button.dataset.threat;
+    const threat = threatData.find(t => t.id === threatId);
+    if (threat) {
+      showThreatDetails(threat);
+    }
+  }
+});
+
+// Modal close handler
+document.getElementById('closeModal')?.addEventListener('click', () => {
+  document.getElementById('threatModal')?.classList.add('hidden');
+});
+
+// Close modal when clicking outside
+document.getElementById('threatModal')?.addEventListener('click', (e) => {
+  if (e.target.id === 'threatModal') {
+    e.target.classList.add('hidden');
+  }
+});
+// Initialize list with auto-refresh
+document.addEventListener('DOMContentLoaded', () => {
+  updateThreatList();
+  const interval = setInterval(updateThreatList, 300000);
+  
+  // Cleanup interval when page is unloaded
+  window.addEventListener('unload', () => clearInterval(interval));
+});
+</script>
